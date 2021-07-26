@@ -30,15 +30,6 @@ const darkColorScheme = ColorScheme.dark(
   onError: Colors.black,
 );
 
-final lightTextTheme = TextTheme(
-  headline6: TextStyle(color: lightColorScheme.onPrimary),
-  subtitle1: TextStyle(color: lightColorScheme.onPrimary),
-  subtitle2: TextStyle(color: lightColorScheme.onPrimary),
-  bodyText1: TextStyle(color: lightColorScheme.onPrimary),
-  bodyText2: TextStyle(color: lightColorScheme.onPrimary),
-  button: TextStyle(color: lightColorScheme.onPrimary),
-);
-
 final lightIconTheme = IconThemeData(color: lightColorScheme.onPrimary);
 
 final lightButtonTheme = ButtonThemeData(textTheme: ButtonTextTheme.accent);
@@ -47,7 +38,6 @@ final lightTextButtonTheme = TextButtonThemeData(
 );
 
 final lightTheme = ThemeData.from(colorScheme: lightColorScheme).copyWith(
-  textTheme: lightTextTheme,
   iconTheme: lightIconTheme,
   primaryIconTheme: lightIconTheme,
   buttonTheme: lightButtonTheme,
