@@ -47,7 +47,6 @@ class FlutterApp extends StatelessWidget {
       title: 'Flutter App',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
-      darkTheme: darkTheme,
       themeMode: ThemeMode.light,
       initialRoute: initialRoute,
       routes: appRoutes,
