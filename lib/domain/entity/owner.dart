@@ -1,6 +1,6 @@
 class Owner {
   final int id;
-  final String picture;
+  final String? picture;
   final String profileLink;
 
   const Owner({

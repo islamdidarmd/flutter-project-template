@@ -6,7 +6,7 @@ class Repository {
   final Owner owner;
   final bool private;
   final String repoLink;
-  final String description;
+  final String? description;
   final List<String> topics;
 
   const Repository({

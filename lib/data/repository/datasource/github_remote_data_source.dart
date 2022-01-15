@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
-import 'package:flutter_project_template/core/error/app_error.dart';
 import 'package:flutter_project_template/app/service_locator.dart';
+import 'package:flutter_project_template/domain/domain.dart';
 import '../../model/models.dart';
 
 abstract class GithubRemoteDataSource {
@@ -19,8 +19,9 @@ class GithubRemoteDataSourceImpl implements GithubRemoteDataSource {
           await dio.get("https://api.github.com/search/repositories?q=$key");
 
       if (response.data != null) {
-        final parsed = json.decode(response.data);
-        return Right(RepoSearchResponse.fromJson(parsed));
+        final decoded = json.decode(response.toString());
+        final parsed = RepoSearchResponse.fromJson(decoded);
+        return Right(parsed);
       } else {
         return Left(
             AppError(type: ErrorType.Unknown, message: 'Unknown error'));

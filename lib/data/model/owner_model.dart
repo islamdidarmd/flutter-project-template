@@ -6,7 +6,7 @@ class OwnerModel {
   final int id;
 
   @JsonKey(name: "avatar_url")
-  final String avatarUrl;
+  final String? avatarUrl;
 
   @JsonKey(name: "html_url")
   final String htmlUrl;

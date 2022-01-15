@@ -9,7 +9,7 @@ part of 'models.dart';
 OwnerModel _$OwnerModelFromJson(Map<String, dynamic> json) {
   return OwnerModel(
     id: json['id'] as int,
-    avatarUrl: json['avatar_url'] as String,
+    avatarUrl: json['avatar_url'] as String?,
     htmlUrl: json['html_url'] as String,
   );
 }
@@ -27,8 +27,8 @@ RepositoryModel _$RepositoryModelFromJson(Map<String, dynamic> json) {
     name: json['name'] as String,
     owner: OwnerModel.fromJson(json['owner'] as Map<String, dynamic>),
     private: json['private'] as bool,
-    repoLink: json['repoLink'] as String,
-    description: json['description'] as String,
+    repoLink: json['html_url'] as String,
+    description: json['description'] as String?,
     topics: (json['topics'] as List<dynamic>).map((e) => e as String).toList(),
   );
 }
@@ -39,7 +39,7 @@ Map<String, dynamic> _$RepositoryModelToJson(RepositoryModel instance) =>
       'name': instance.name,
       'owner': instance.owner,
       'private': instance.private,
-      'repoLink': instance.repoLink,
+      'html_url': instance.repoLink,
       'description': instance.description,
       'topics': instance.topics,
     };

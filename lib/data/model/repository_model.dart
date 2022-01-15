@@ -14,11 +14,11 @@ class RepositoryModel {
   @JsonKey(name: "private")
   final bool private;
 
-  @JsonKey(name: "repoLink")
+  @JsonKey(name: "html_url")
   final String repoLink;
 
   @JsonKey(name: "description")
-  final String description;
+  final String? description;
 
   @JsonKey(name: "topics")
   final List<String> topics;
