@@ -1,3 +1,4 @@
+import 'package:flutter_project_template/app/constants.dart';
 import 'package:get_it/get_it.dart';
 
 import 'env.dart';
@@ -10,8 +11,8 @@ void main() async {
 
 class ProductionEnv extends Env {
   @override
-  EnvType get envType => EnvType.Production;
+  EnvType get envType => prodEnv;
 
   @override
-  String get appName => "Demo App";
+  String get appName => prodAppName;
 }

@@ -9,7 +9,7 @@ void main() {
 
   test('Env fields are defaults', () {
     assert(env.appName == defaultAppName);
-    assert(env.envType == defaultEnvName);
+    assert(env.envType == defaultEnv);
   });
 
   test('Env initialization is successful', () {
@@ -26,6 +26,4 @@ void main() {
     }
     assert(widgetsBindingInitialized == true);
   });
-
-
 }
