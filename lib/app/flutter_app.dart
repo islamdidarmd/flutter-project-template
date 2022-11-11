@@ -18,7 +18,7 @@ class FlutterApp extends StatelessWidget {
 
   Widget _createApp() {
     return MaterialApp(
-      title: 'Flutter App',
+      title: appName,
       themeMode: ThemeMode.light,
       initialRoute: initialRoute,
       routes: appRoutes,

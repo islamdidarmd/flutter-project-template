@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'constants.dart';
 
 import 'flutter_app.dart';
 import 'service_locator.dart';
@@ -6,12 +8,12 @@ import 'service_locator.dart';
 enum EnvType { Development, Production }
 
 class Env {
-  final EnvType envType = EnvType.Development;
-  final String appName = "Flutter App";
+  final EnvType envType = defaultEnvName;
+  final String appName = defaultAppName;
 
-  void init() {
+  void init({required GetIt slInstance}) {
     WidgetsFlutterBinding.ensureInitialized();
-    setUpDependencies();
+    setUpDependencies(slInstance: slInstance);
   }
 
   void startApplication() {
