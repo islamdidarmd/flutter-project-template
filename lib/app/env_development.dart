@@ -1,8 +1,10 @@
+import 'package:get_it/get_it.dart';
+
 import 'env.dart';
 
 void main() async {
   final env = DevelopmentEnv();
-  env.init();
+  env.init(slInstance: GetIt.instance);
   env.startApplication();
 }
 
