@@ -47,5 +47,10 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+#ios related
+ios/Podfile
+ios/pods/
+ios/Podfile.lock
+
 #Test coverage related
 coverage/
