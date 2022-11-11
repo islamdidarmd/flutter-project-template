@@ -8,7 +8,7 @@ import 'service_locator.dart';
 enum EnvType { Development, Production }
 
 class Env {
-  final EnvType envType = defaultEnvName;
+  final EnvType envType = defaultEnv;
   final String appName = defaultAppName;
 
   void init({required GetIt slInstance}) {
