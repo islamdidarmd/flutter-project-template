@@ -36,12 +36,7 @@ class HomePageContent extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state is HomeLoadingState) {
-          return Padding(
-            padding: EdgeInsets.only(top: 200),
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
+          return Center(child: CircularProgressIndicator());
         } else if (state is HomeErrorState) {
           final error = state.error;
           return Padding(
@@ -56,8 +51,7 @@ class HomePageContent extends StatelessWidget {
         }
         return Padding(
             padding: EdgeInsets.only(top: 200),
-            child: Container(
-                child: Text("Enter keyword to search on github")));
+            child: Container(child: Text("Enter keyword to search on github")));
       },
     );
   }
