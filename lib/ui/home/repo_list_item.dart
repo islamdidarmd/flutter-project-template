@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_template/domain/domain.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RepoListItem extends StatelessWidget {
   final Repository repository;
@@ -11,8 +13,12 @@ class RepoListItem extends StatelessWidget {
     return Card(
       key: ValueKey(repository.id),
       child: ListTile(
+        onTap: () => onListItemTapped(repository),
         leading: CircleAvatar(
-          foregroundImage: Image.network(repository.owner.picture ?? '').image,
+          foregroundImage: CachedNetworkImageProvider(
+            repository.owner.picture ?? '',
+            errorListener: () {},
+          ),
         ),
         title: Text(repository.name),
         subtitle: Text(
@@ -22,5 +28,12 @@ class RepoListItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onListItemTapped(Repository repository) async {
+    final uri = Uri.parse(repository.repoLink);
+    if (await canLaunchUrl(uri)) {
+      launchUrl(uri);
+    }
   }
 }
