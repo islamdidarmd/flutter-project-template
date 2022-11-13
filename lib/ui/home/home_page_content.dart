@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_template/domain/entity/repository.dart';
 
 import 'home_cubit.dart';
+import 'repo_list_item.dart';
 
 class HomePageContent extends StatelessWidget {
   HomePageContent({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class HomePageContent extends StatelessWidget {
     return Column(
       children: [
         TextField(
+          key: ValueKey('Query Input'),
           controller: _controller,
           decoration: InputDecoration(
               labelText: 'Enter Query',
@@ -61,16 +63,7 @@ class HomePageContent extends StatelessWidget {
       itemCount: repository.length,
       itemBuilder: (context, index) {
         final repo = repository[index];
-        return Card(
-          child: ListTile(
-            title: Text(repo.name),
-            subtitle: Text(
-              repo.description ?? "",
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        );
+        return RepoListItem(repository: repo);
       },
     );
   }
