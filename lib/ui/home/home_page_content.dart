@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_template/domain/entity/repository.dart';
+import 'package:flutter_project_template/ui/home/query_input.dart';
 
 import 'home_cubit.dart';
 import 'repo_list_item.dart';
@@ -13,20 +14,7 @@ class HomePageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextField(
-          key: ValueKey('Query Input'),
-          controller: _controller,
-          decoration: InputDecoration(
-              labelText: 'Enter Query',
-              suffixIcon: IconButton(
-                onPressed: () {
-                  final bloc = BlocProvider.of<HomeCubit>(context);
-                  bloc.search(_controller.text);
-                },
-                icon: Icon(Icons.search),
-              ),
-              border: OutlineInputBorder()),
-        ),
+        QueryInput(textEditingController: _controller),
         Expanded(
           child: buildContent(context),
         )
