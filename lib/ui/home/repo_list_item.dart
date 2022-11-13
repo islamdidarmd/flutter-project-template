@@ -11,6 +11,9 @@ class RepoListItem extends StatelessWidget {
     return Card(
       key: ValueKey(repository.id),
       child: ListTile(
+        leading: CircleAvatar(
+          foregroundImage: Image.network(repository.owner.picture ?? '').image,
+        ),
         title: Text(repository.name),
         subtitle: Text(
           repository.description ?? "",

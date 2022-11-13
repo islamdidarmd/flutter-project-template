@@ -6,15 +6,21 @@ import 'package:flutter_project_template/ui/home/query_input.dart';
 import 'home_cubit.dart';
 import 'repo_list_item.dart';
 
-class HomePageContent extends StatelessWidget {
+class HomePageContent extends StatefulWidget {
   HomePageContent({Key? key}) : super(key: key);
-  final TextEditingController _controller = TextEditingController();
+
+  @override
+  State<HomePageContent> createState() => _HomePageContentState();
+}
+
+class _HomePageContentState extends State<HomePageContent> {
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        QueryInput(textEditingController: _controller),
+        QueryInput(textEditingController: controller),
         Expanded(
           child: buildContent(context),
         )
@@ -29,19 +35,12 @@ class HomePageContent extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         } else if (state is HomeErrorState) {
           final error = state.error;
-          return Padding(
-            padding: EdgeInsets.only(top: 200),
-            child: Center(
-              child: Text(error.message),
-            ),
-          );
+          return Center(child: Text(error.message));
         } else if (state is HomeSuccessState) {
           final repositories = state.repositories;
           return buildList(repositories);
         }
-        return Padding(
-            padding: EdgeInsets.only(top: 200),
-            child: Container(child: Text("Enter keyword to search on github")));
+        return Center(child: Text("Enter keyword to search on github"));
       },
     );
   }
@@ -54,5 +53,11 @@ class HomePageContent extends StatelessWidget {
         return RepoListItem(repository: repo);
       },
     );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }
