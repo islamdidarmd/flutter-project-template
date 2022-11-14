@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project_template/domain/entity/repository.dart';
+import 'package:flutter_project_template/ui/home/query_input.dart';
 
 import 'home_cubit.dart';
+import 'repo_list_item.dart';
 
-class HomePageContent extends StatelessWidget {
+class HomePageContent extends StatefulWidget {
   HomePageContent({Key? key}) : super(key: key);
-  final TextEditingController _controller = TextEditingController();
+
+  @override
+  State<HomePageContent> createState() => _HomePageContentState();
+}
+
+class _HomePageContentState extends State<HomePageContent> {
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextField(
-          controller: _controller,
-          decoration: InputDecoration(
-              labelText: 'Enter Query',
-              suffixIcon: IconButton(
-                onPressed: () {
-                  final bloc = BlocProvider.of<HomeCubit>(context);
-                  bloc.search(_controller.text);
-                },
-                icon: Icon(Icons.search),
-              ),
-              border: OutlineInputBorder()),
-        ),
+        QueryInput(textEditingController: controller),
         Expanded(
           child: buildContent(context),
         )
@@ -36,28 +32,15 @@ class HomePageContent extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state is HomeLoadingState) {
-          return Padding(
-            padding: EdgeInsets.only(top: 200),
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
+          return Center(child: CircularProgressIndicator());
         } else if (state is HomeErrorState) {
           final error = state.error;
-          return Padding(
-            padding: EdgeInsets.only(top: 200),
-            child: Center(
-              child: Text(error.message),
-            ),
-          );
+          return Center(child: Text(error.message));
         } else if (state is HomeSuccessState) {
           final repositories = state.repositories;
           return buildList(repositories);
         }
-        return Padding(
-            padding: EdgeInsets.only(top: 200),
-            child: Container(
-                child: Text("Enter keyword to search on github")));
+        return Center(child: Text("Enter keyword to search on github"));
       },
     );
   }
@@ -67,17 +50,14 @@ class HomePageContent extends StatelessWidget {
       itemCount: repository.length,
       itemBuilder: (context, index) {
         final repo = repository[index];
-        return Card(
-          child: ListTile(
-            title: Text(repo.name),
-            subtitle: Text(
-              repo.description ?? "",
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        );
+        return RepoListItem(repository: repo);
       },
     );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }

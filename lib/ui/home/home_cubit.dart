@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_project_template/domain/core/error/app_error.dart';
 import 'package:flutter_project_template/domain/domain.dart';
-import 'package:flutter_project_template/domain/entities.dart';
 
 part 'home_state.dart';
 
